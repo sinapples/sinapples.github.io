@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>EV Guide</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script type="text/javascript" src="CalulatorControl.js"></script>
+</head>
+<body onload='hideTotal()'>
+    <div id="wrap">
+        <form action="" id="cakeform" onsubmit="return false;">
+        <div>
+            <div class="cont_order">
+               <fieldset>
+                <legend>Battle Calulator!</legend>
+
+		<p>
+                  <label for='pokerus' class="inlinelabel">What Stat are you training?</label>
+                 <select id="filling" name='filling' onchange="getLocation()">
+                <option value="HP">HP</option>
+                <option value="Attack">Attack</option>
+                <option value="Defense">Defense</option>
+                <option value="Sp.Attack">Sp. Attack</option>
+                <option value="Sp.Defense">Sp. Defense </option>
+                <option value="Speed">Speed</option>
+                </select>
+                </p>
+  		
+                 <div id="Location"></div><br>
+
+		<p>
+                  <label for='pokerus' class="inlinelabel">Pokerus?</label>
+                  <input type="checkbox" id="pokerus" name='pokerus' onclick="calculateTotal()" />
+                </p>
+
+                <label >What Item are you using?</label><br/>
+                <label class='radiolabel'><input type="radio"  name="selectedcake" value="4" onclick="calculateTotal()" />Power Item</label><br/>
+                <label class='radiolabel'><input type="radio"  name="selectedcake" value="2" onclick="calculateTotal()" />Macho Brace</label><br/>
+                <label class='radiolabel'><input type="radio"  name="selectedcake" value="0" onclick="calculateTotal()" />None</label><br/>
+		</label><br/>
+                
+             	<!--label >How many Effort Value Points? <br/>
+                <input type="range" id="maxStat" value="256" max="256" min="0" onclick="calculateTotal()"></label>
+                <input type="text" name="maxStat" value="256"><br-->
+                <div id="totalPrice"></div><br>
+
+
+
+                <button type="button" id="button" onclick="fight()">Defeated!</button><br>
+		 <div id="remaining"></div>
+                </fieldset>
+
+		
+
+            </div>
+            
+        </div>  
+       </form>
+	</div><!--End of wrap-->
+
+</body>
+</html>

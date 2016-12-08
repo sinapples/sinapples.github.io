@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>EV Counter</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <!-- Custom styles for this template -->
+    <link href="css/jumbotron-narrow.css" rel="stylesheet">
+
+   <script type="text/javascript" src="CalulatorControl.js"></script>
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="#">Tools</a></li>
+            <li role="presentation"><a href="#">About</a></li>
+            <li role="presentation"><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Pokemon Sun and Moon</h3>
+      </div>
+
+      <div class="jumbotron" onload='hideTotal()'>
+        <h1>EV Training Calulator</h1>
+
+        <p class="lead">This Will help you prepare and keep track of your EVs in Sun and Moon</p>
+       <form action="" id="cakeform" onsubmit="return false;">
+
+
+        <fieldset>
+      
+
+         <p>
+         <label for='pokerus' class="inlinelabel">What Stat are you training?</label><br>
+         <select id="filling" name='filling' onchange="getLocation()">
+            <option value="HP">HP</option>
+            <option value="Attack">Attack</option>
+            <option value="Defense">Defense</option>
+            <option value="Sp.Attack">Sp. Attack</option>
+            <option value="Sp.Defense">Sp. Defense </option>
+            <option value="Speed">Speed</option>
+          </select>
+          
+      
+          <div id="Location"></div><br>
+
+          <p>
+          <label for='pokerus' class="inlinelabel">Do you have Pokerus?    </label>
+
+          <input type="checkbox" id="pokerus" name='pokerus' onclick="calculateTotal()" /><br>
+               
+
+          <label >What Item are you using?</label><br/>
+        </p>
+            <label class='radiolabel'><input type="radio"  name="selectedcake" value="4" onclick="calculateTotal()" />Power Item</label><br/>
+            <label class='radiolabel'><input type="radio"  name="selectedcake" value="2" onclick="calculateTotal()" />Macho Brace</label><br/>
+            <label class='radiolabel'><input type="radio"  name="selectedcake" value="0" onclick="calculateTotal()" />None</label><br/>
+          </label><br/>
+                
+           
+          <div id="totalPrice"></div><br>
+
+
+
+          <a class="btn btn-lg btn-success"  type="button" id="button" role="button" onclick="fight()">Defeated!</a></p>
+          <div id="remaining"></div>
+
+      
+                </fieldset>
+
+
+
+
+
+      </div>
+
+
+      <footer class="footer">
+        <p>&copy; 2016 Sinapples, Inc.</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
