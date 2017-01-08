@@ -14,9 +14,9 @@
 }
 
 .funkyradio label {
-  width: 40%;
-  border-radius: 3px;
-  border: 1px solid #D1D3D4;
+  width: 60%;
+  border-radius: 4px;
+  border: 2px solid #D1D3D4;
   font-weight: normal;
 }
 
@@ -28,7 +28,7 @@
 .funkyradio input[type="radio"]:empty ~ label,
 .funkyradio input[type="checkbox"]:empty ~ label {
   position: relative;
-  line-height: 2.5em;
+  line-height: 3em;
   text-indent: 3.25em;
 
   cursor: pointer;

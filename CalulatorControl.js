@@ -156,6 +156,7 @@ function fight() {
     var divobj = document.getElementById('remaining');
     if (fightStartBoolean == true){
         output2.innerHTML = "Defeated";
+      
         //display the result
    
         divobj.style.display='block';
