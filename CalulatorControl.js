@@ -28,7 +28,7 @@
 var macho = 1;	
 var  evPreStat = 256;	
 var total = 25; 
-var trainedStat = "Stat";
+var trainedStat = "stat";
 var sosModifier = 2;
 
 //Variables 
@@ -156,7 +156,7 @@ function fight() {
     var divobj = document.getElementById('remaining');
     if (fightStartBoolean == true){
         output2.innerHTML = "Defeated";
-      
+
         //display the result
    
         divobj.style.display='block';
