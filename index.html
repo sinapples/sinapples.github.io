@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+
 
     <title>EV Counter</title>
 
@@ -27,33 +27,35 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body onload='hideElements()'>
 
     <div class="container">
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
             <li role="presentation" class="active"><a href="#">Tools</a></li>
-            <li role="presentation"><a href="#">About</a></li>
-            <li role="presentation"><a href="#">Contact</a></li>
+           
+            <li role="presentation"><a href="about.html">About</a></li>
           </ul>
         </nav>
-        <h3 class="text-muted">Pokemon Sun and Moon</h3>
+        <h3 >Pokemon Sun and Moon</h3>
       </div>
 
-      <div class="jumbotron" onload='hideTotal()'>
+      <div class="jumbotron" >
         <h1>EV Training Calulator</h1>
 
-        <p class="lead">This Will help you prepare and keep track of your EVs in Sun and Moon</p>
-       <form action="" id="cakeform" onsubmit="return false;">
+        <p class="lead">This tool help keep track of your SOS chains in <br> Pokemon Sun and Moon</p>
+
+       <form action="" id="evTrainingForm" onload='hideElements()' onsubmit="return false;">
 
 
         <fieldset>
       
 
          <p>
-         <label for='pokerus' class="inlinelabel">What Stat are you training?</label><br>
-         <select id="filling" name='filling' onchange="getLocation()">
+         <label for='pokerus' class="inlinelabel">What stat are you training?</label><br>
+         <select id="stat" name='stat' onchange="getLocation()">
+            <option value="select">Select</option>
             <option value="HP">HP</option>
             <option value="Attack">Attack</option>
             <option value="Defense">Defense</option>
@@ -66,33 +68,52 @@
           <div id="Location"></div><br>
 
           <p>
-          <label for='pokerus' class="inlinelabel">Do you have Pokerus?    </label>
+          <label for='pokerus' class="inlinelabel">Does your pokemon have the following?    </label>
 
-          <input type="checkbox" id="pokerus" name='pokerus' onclick="calculateTotal()" /><br>
-               
+          <div class="funkyradio">
+           <div class="funkyradio-success">
+            <input type="checkbox" id="pokerus" name='pokerus' onclick="calculateTotal()">
+            <label for="pokerus">Pokerus</label>
+        </div>
 
-          <label >What Item are you using?</label><br/>
-        </p>
-            <label class='radiolabel'><input type="radio"  name="selectedcake" value="4" onclick="calculateTotal()" />Power Item</label><br/>
-            <label class='radiolabel'><input type="radio"  name="selectedcake" value="2" onclick="calculateTotal()" />Macho Brace</label><br/>
-            <label class='radiolabel'><input type="radio"  name="selectedcake" value="0" onclick="calculateTotal()" />None</label><br/>
-          </label><br/>
-                
+
+
+
+       
+    
+         
+             
+          <div class="funkyradio">
+        <div class="funkyradio-success">
+            <input type="radio" name="heldItem" value="power" onclick="calculateTotal()" id="radio1" />
+            <label for="radio1">Power Item</label>
+        </div>
+        <div class="funkyradio-success">
+            <input type="radio" name="heldItem" value="macho" onclick="calculateTotal()"id="radio2" />
+            <label for="radio2">Macho Brace </label>
+        </div>
+        <div class="funkyradio-success">
+            <input type="radio" name="heldItem" value="none" onclick="calculateTotal()" id="radio3" />
+            <label for="radio3">None</label>
+        </div>
+        
+    </div>
+
+
            
-          <div id="totalPrice"></div><br>
+          <br><div id="totalPrice"></div><br>
 
 
 
-          <a class="btn btn-lg btn-success"  type="button" id="button" role="button" onclick="fight()">Defeated!</a></p>
-          <div id="remaining"></div>
+          <a class="btn btn-lg btn-success"  type="button" id="fightButton" role="button" onclick="fight()">Defeated!</a></p>
+          <br><div id="remaining"></div>
 
       
                 </fieldset>
 
 
 
-
-
+      <br><br><a href="http://www.ign.com/wikis/pokemon-sun-pokemon-moon/How_to_EV_Train_in_Pokemon_Sun_and_Moon">What is EV Training?</a>      
       </div>
 
 
@@ -104,6 +125,6 @@
 
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+ 
   </body>
 </html>

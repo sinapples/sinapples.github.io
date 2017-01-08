@@ -1,189 +1,207 @@
- //Set up an associative array
- //The keys represent the size of the cake
- //The values represent the cost of the cake i.e A 10" cake cost's $35
- var cake_prices = new Array();
- cake_prices["HP"]="Poni Wilds, Surfing ambush (Poni Island)";
- cake_prices["Attack"]="Route 4 (Akala Island)";
- cake_prices["Defense"]="Eggy Island (Poni Island) ";
- cake_prices["Sp.Attack"]="Hau'oli Cemetary (Route 2, Melemele Island)";
- cake_prices["Sp.Defense"]="Hano Beach, Surfing ambush (east of Hano Grand Resort)";
+
+//Used to associate a stat and a location
+ var statLocationArray = new Array();
+ statLocationArray["HP"]="<b>Poni Wilds </b> in Poni Island and get surf ambushed";
+ statLocationArray["Attack"]="<b>Route 4</b> in Akala Island";
+ statLocationArray["Defense"]="<b>Exeggutor Island</b> in Poni Island ";
+ statLocationArray["Sp.Attack"]="<b>Brooklet Hill</b> in Akala Island";
+ statLocationArray["Sp.Defense"]="<b>Hano Beach</b> in Akala Island and get surf ambushed";
  
- cake_prices["Speed"]="Verdant Cavern, dust cloud ambush [Moon only] (Route 2, Melemele Island)";
+ statLocationArray["Speed"]="<b>Route 3</b> in Melemele Island";
 
 
  
- //Set up an associative array 
- //The keys represent the filling type
- //The value represents the cost of the filling i.e. Lemon filling is $5,Dobash filling is $9
- //We use this this array when the user selects a filling from the form
- var filling_prices= new Array();
- filling_prices["HP"]="Wailmer";
- filling_prices["Attack"]="Lillipup, Pikipek, Mudbray, Yungoos, Grubbin ";
- filling_prices["Defense"]="Exeggcute";
+//Used to associate a stat and a pokemon
+ var statPokemonArray= new Array();
+ statPokemonArray["HP"]="<b>Wailmer</b>  lvl ~40";
+ statPokemonArray["Attack"]="<b>Lillipup, Pikipek, Mudbray, Yungoos, or Grubbin</b> lvl ~10";
+ statPokemonArray["Defense"]="<b>Exeggcute </b> lvl 40~";
 
- filling_prices["Sp.Attack"]="Gastly";
- filling_prices["Sp.Defense"]="Tentacool";
- filling_prices["Speed"]="Rattata";
+ statPokemonArray["Sp.Attack"]="<b>Psyduck</b>  lvl ~15";
+ statPokemonArray["Sp.Defense"]="<b>Tentacool</b> lvl ~24";
+ statPokemonArray["Speed"]="<b> Spearow or Cutiefly</b> lvl ~12";
 
 
 
 
-
+//Constants  
 var macho = 1;	
-var  evPreStat = 256;
-	
+var  evPreStat = 256;	
 var total = 25; 
-var trainedStat = "Trained Stat";
+var trainedStat = "Stat";
+var sosModifier = 2;
 
+//Variables 
+var fightStartBoolean = false;
 
 
 function getLocation(){
 
 
 
-    //Get a reference to the form id="cakeform"
-    var theForm = document.forms["cakeform"];
-    //Get a reference to the select id="filling"
-     var selectedFilling = theForm.elements["filling"];
- 
-  var  pokemon = filling_prices[selectedFilling.value];
+   
+    var form = document.forms["evTrainingForm"];
 
-  var  location = cake_prices[selectedFilling.value];
+    var selectedStat = form.elements["stat"];
+    var divobj4 = document.getElementById('Location');
 
-
-  var divobj4 = document.getElementById('Location');
-    divobj4.style.display='block';
-      divobj4.innerHTML = "<p>To Train go to <b>"+ location + " </b>and fight  <b>" + pokemon + "</b>  </p>";
-
-}
-
-
-// getItem() finds the price based on the size of the cake.
-// Here, we need to take user's the selection from radio button selection
-function getItem()
-{  
-    var cakeSizePrice=0;
-    //Get a reference to the form id="cakeform"
-    var theForm = document.forms["cakeform"];
-    //Get a reference to the cake the user Chooses name=selectedCake":
-    var selectedCake = theForm.elements["selectedcake"];
-    //Here since there are 4 radio buttons selectedCake.length = 4
-    //We loop through each radio buttons
-    for(var i = 0; i < selectedCake.length; i++)
-    {
-        //if the radio button is checked
-        if(selectedCake[i].checked)
-        {
-            
-	  if (selectedCake[i].value == 2 ) {
-		setMacho(2);
-		return 0;
-	}
-	if (selectedCake[i].value == 0 ) {
-		setMacho(1);
-		return 0;
-	}
-            return 4;
-            //If we get a match then we break out of this loop
-            //No reason to continue if we get a match
-            break;
-        }
+    if (selectedStat.value == "select"){
+        trainedStat =  "stat";
+        divobj4.style.display='none';
+        return;
     }
-    //We return the cakeSizePrice
-    return cakeSizePrice;
+    var  pokemon = statPokemonArray[selectedStat.value];
+
+    var  location = statLocationArray[selectedStat.value];
+
+    trainedStat = selectedStat.value;
+ 
+    divobj4.style.display='block';
+    divobj4.innerHTML = "<p>Go to <br>"+ location + " <br>to fight  <br>" + pokemon + "  </p>";
+
 }
 
-function setMacho(val)
-{  
 
-     macho = val;
+
+function getItem() {  
+
+
+    var theForm = document.forms["evTrainingForm"];
+    var heldItem = theForm.elements["heldItem"];
+    //Here since there are 4 radio buttons heldItem.length = 4
+    //We loop through each radio buttons
+    for(var i = 0; i < heldItem.length; i++) {
+
+        //if the radio button is checked
+        if(heldItem[i].checked) {
+            
+	       if (heldItem[i].value == "macho" ) {
+		         setMacho(2);
+		        return 0;
+            }
+             if (heldItem[i].value == "none" ) {
+                setMacho(1);
+		        return 0;
+            }
+             if (heldItem[i].value == "power" ) {
+                setMacho(1);
+                return 8;
+            }
+        }
+       
+    }
+     return 0;
+
 }
 
-function getMacho()
-{  
+function setMacho(value) {  
+     macho = value;
+}
+
+function getMacho() {  
 
     return macho;
 }
 
-//getcakeform() finds the candles price based on a check box selection
-function getPokerus()
-{
-    var candlePrice=1;
-    //Get a reference to the form id="cakeform"
-    var theForm = document.forms["cakeform"];
-    //Get a reference to the checkbox id="includecandles"
-    var includeCandles = theForm.elements["pokerus"];
+//getevTrainingForm() finds the candles price based on a check box selection
+function getPokerus() {
+    
+    var pokerusValue=1;
 
-    //If they checked the box set candlePrice to 5
-    if(includeCandles.checked==true)
-    {
-        candlePrice=2;
+    var form = document.forms["evTrainingForm"];
+    var pokerusBoolean = form.elements["pokerus"];
+
+    if(pokerusBoolean.checked==true){
+        pokerusValue=2;
     }
-    //finally we return the candlePrice
-    return candlePrice;
+
+    return pokerusValue;
 }
 
-function getMaxStat()
-{
+function getMaxStat() {
   
-    //Get a reference to the form id="cakeform"
-    var theForm = document.forms["cakeform"];
-    //Get a reference to the checkbox id="includecandles"
-    var includeCandles = theForm.elements["maxStat"];
 
-return 252;
-   // return includeCandles.value;
+
+    return 252;
+  
 }
 
         
-function calculateTotal()
-{
+function calculateTotal() {
     var baseEV = 1;
-     evPreStat = getMaxStat();
-    //Here we get the total price by calling our function
-    //Each function returns a number so by calling them we add the values they return together
-    var cakePrice = Math.ceil(evPreStat/  (  ( ( getItem() + baseEV ) * getMacho() *getPokerus()*2  ) )  );
+    evPerStat = getMaxStat();
+
+
+    //Formula to calculate EVs 
+    total = Math.ceil(evPerStat/  (  ( ( getItem() + baseEV ) * getMacho() *getPokerus() * sosModifier  ) )  );
     
     //display the result
-    var divobj = document.getElementById('totalPrice');
-    divobj.style.display='block';
-        var divobj2 = document.getElementById('button');
-    divobj2.style.display='block';
-    divobj.innerHTML = "<p>You need to battle <b>"+cakePrice + "</b> Pokemon</p>";
-    total = cakePrice;
-fight()
+    var output = document.getElementById('totalPrice');
+    output.style.display='block';
+    output.innerHTML = "<p>You need to battle <b>"+total + "</b> Pokemon</p>";
+    
+    var output2 = document.getElementById('fightButton');
+     var divobj = document.getElementById('remaining');
+            divobj.style.display='none';
+       output2.style.display='inline';
+     output2.innerHTML = "Start";
+   fightStartBoolean = false;
+
+    fight();
 }
 
         
-function fight()
-{
+function fight() {
+     var output2 = document.getElementById('fightButton');
+    var divobj = document.getElementById('remaining');
+    if (fightStartBoolean == true){
+        output2.innerHTML = "Defeated";
+        //display the result
+   
+        divobj.style.display='block';
+
+    
+
+         
+          if (total == 2) {
+             var koBoth= "<p>Knockout both Pokemon";
+            divobj.innerHTML = koBoth+ "<br> <b>" +total + "</b> Pokemon left to fight</p>";
+             total = total-1;
+         }   
+         else if (total > 0 ){
+             divobj.innerHTML = "<p> <b>" +total + "</b> Pokemon left to fight</p>";
+             total = total-1;
+         }  
+
+        else if (total == 0){
+                divobj.innerHTML = "<p> Congrats!<br> Your <b>"+ trainedStat + "</b> is maxed out!</p>";
+                output2.innerHTML = "Restart";
+                total = total-1;
+
+            }
+        else if (total < 0) {
+                calculateTotal() ;
+        }
+
+
+    }
+    else {
+        fightStartBoolean = true;
      
 
-   
-    //display the result
-    var divobj = document.getElementById('remaining');
-    divobj.style.display='block';
-    if (total > 0 ){
-
-    divobj.innerHTML = "<p> <b>" +total + "</b> Pokemon left to fight</p>";
-    total = total-1;}
-    else {
-    divobj.innerHTML = "<p> <b>"+ trainedStat + "</b> is maxed out!</p>";
-
-
-}
+    }
 }
 
 
 
-function hideTotal()
-{
+function hideElements() {
+
+    
     var divobj = document.getElementById('totalPrice');
     divobj.style.display='none';
-        var divobj2 = document.getElementById('button');
+    
+    var divobj2 = document.getElementById('fightButton');
     divobj2.style.display='none';
-
-
 
 
 
